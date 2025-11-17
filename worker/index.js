@@ -14,7 +14,7 @@ export class ChatMemory {
             if (typeof message === "string" && typeof role === "string") {
                 history.push({ role, content: message });
                 
-                // ⭐ BONUS 3: Limit memory length (best practice for token management)
+                //  BONUS 3: Limit memory length (best practice for token management)
                 if (history.length > 20) {
                     history.shift(); // Remove oldest message
                 }
@@ -32,7 +32,7 @@ export class ChatMemory {
             });
         }
 
-        // ⭐ BONUS 1: Clear memory functionality
+        //  BONUS 1: Clear memory functionality
         if (action === "clear") {
             await this.state.storage.delete("history");
             return new Response(JSON.stringify({ ok: true }), {
@@ -64,7 +64,7 @@ const HTML = `<!DOCTYPE html>
       transition: background 0.3s;
     }
     
-    /* ⭐ BONUS 5: Dark Mode */
+    /*  BONUS 5: Dark Mode */
     body.dark {
       background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
     }
@@ -176,7 +176,7 @@ const HTML = `<!DOCTYPE html>
       color: #e0e0e0;
     }
     
-    /* ⭐ BONUS 2: Typing Indicator */
+    /*  BONUS 2: Typing Indicator */
     .typing {
       background: #e6e6e6;
       color: #666;
@@ -282,7 +282,7 @@ const HTML = `<!DOCTYPE html>
       return div;
     }
 
-    // ⭐ BONUS 2: Typing Indicator
+    //  BONUS 2: Typing Indicator
     function showTyping() {
       const div = document.createElement("div");
       div.className = "msg typing";
@@ -325,7 +325,7 @@ const HTML = `<!DOCTYPE html>
       }
     }
 
-    // ⭐ BONUS 1: Clear Memory
+    //  BONUS 1: Clear Memory
     async function clearMemory() {
       if (!confirm("Are you sure you want to clear all conversation history?")) return;
       
@@ -342,7 +342,7 @@ const HTML = `<!DOCTYPE html>
       }
     }
 
-    // ⭐ BONUS 5: Dark Mode Toggle
+    //  BONUS 5: Dark Mode Toggle
     function toggleDark() {
       document.body.classList.toggle("dark");
       darkBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
@@ -372,7 +372,7 @@ export default {
             });
         }
 
-        // ⭐ BONUS 1: Clear memory endpoint
+        //  BONUS 1: Clear memory endpoint
         if (url.pathname === "/api/clear" && request.method === "POST") {
             const id = env.CHAT_MEMORY.idFromName("session-1");
             const stub = env.CHAT_MEMORY.get(id);
