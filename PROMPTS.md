@@ -1,63 +1,82 @@
 # PROMPTS.md
-This document summarizes the types of AI-assisted prompts I used while developing this project.  
-My usage of AI was limited to **documentation lookup**, **syntax confirmation**, and **debugging guidance**.  
-All **architecture decisions**, **data flow design**, **Durable Object logic**, and the **final integrated implementation** were written and reasoned about by me.
 
-Cloudflare explicitly allows candidates to use AI tools during the optional assignment, as long as the work is original — this project was fully implemented and debugged by myself.
+This document describes how I used AI assistance while building this project.
 
----
+## My Development Process
 
-## 1. Prompts used for documentation lookup
-These prompts were used mainly to clarify Cloudflare APIs and confirm syntax details:
+I built this AI chatbot application by myself, with AI tools serving as a learning assistant — similar to how developers use documentation, Stack Overflow, or pair programming.
 
-- *“What is the correct model ID format for Workers AI llama 3.x?”*
-- *“Show me the expected input format for Workers AI when using the ‘messages’ parameter.”*
-- *“How do I define a Durable Object binding inside wrangler.toml?”*
-- *“What properties does the Durable Object ‘state.storage’ API provide?”*
+**What I did myself:**
+- Designed the overall architecture (Durable Objects for state, Workers AI for inference)
+- Wrote all the code structure and logic
+- Made technical decisions (why Durable Objects vs KV, memory window size, etc.)
+- Debugged issues and fixed errors
+- Designed and implemented the UI
 
-I used these prompts in the same way developers typically consult docs, StackOverflow, or API references.
-
----
-
-## 2. Prompts used for debugging guidance
-These prompts were used only when I encountered specific errors:
-
-- *“I’m receiving ‘The string did not match the expected pattern’ when calling Workers AI. What causes this?”*
-- *“Why would a Worker return no response when env.AI is not properly bound?”*
-- *“My HTML chat UI shifts upward when the keyboard appears on mobile Safari. What CSS property can prevent this?”*
-
-AI tools helped me understand the cause of the error, but **I validated and applied the fixes myself**.
+**How I used AI:
+- Asked for explanations of Cloudflare APIs I hadn't used before
+- Got help understanding error messages
+- Requested code examples to learn syntax
+- Discussed technical trade-offs and best practices
 
 ---
 
-## 3. Prompts used for frontend refinement
-These prompts focused on UI refinement, not logic:
+## Types of AI Prompts Used
 
-- *“Give me CSS ideas for chat bubble styling similar to modern messaging apps.”*
-- *“How do I make a scrollable message container auto-scroll to the bottom?”*
-- *“What’s a clean way to animate message appearance using CSS?”*
+### 1. Learning Cloudflare Workers
 
-All frontend layout choices (structure, component positioning, responsive adjustments) were implemented manually.
+Since I was new to Cloudflare Workers, I used AI to understand the platform:
+
+- "How do Durable Objects work? Explain with an example."
+- "What's the difference between Durable Objects and Workers KV?"
+- "Show me the basic structure of a Cloudflare Worker."
+- "How do I bind Workers AI to my Worker?"
+
+### 2. API Documentation Help
+
+When official docs were unclear, I asked for clarification:
+
+- "What's the correct format for calling Workers AI with Llama 3.1?"
+- "How do I structure the messages array for chat completion?"
+- "What properties does `state.storage` have in Durable Objects?"
+- "How do I configure wrangler.toml for Durable Objects?"
+
+### 3. Debugging Assistance
+
+When I encountered errors, I asked AI to help me understand them:
+
+- "I'm getting 'The string did not match the expected pattern' from Workers AI. What does this mean?"
+- "Why is my Durable Object not persisting data between requests?"
+- "My Worker returns 'OK' instead of the HTML page. What's wrong with my routing?"
+- "How do I fix DNS_PROBE_FINISHED_NXDOMAIN for Workers?"
+
+AI helped me understand the root cause, but I implemented the fixes myself.
+
+### 4. UI/UX Implementation
+
+For the frontend, I asked for guidance on best practices:
+
+- "How do I make a chat interface scroll to the bottom automatically?"
+- "What's a good CSS pattern for chat bubbles?"
+- "How do I implement dark mode with localStorage?"
+- "Show me how to create a typing indicator animation."
+
+### 5. Code Review and Improvements
+
+I asked AI to review my code and suggest improvements:
+
+- "Is there a better way to manage conversation history?"
+- "Should I limit the number of messages stored? Why?"
+- "Review this code for potential issues."
+- "What are best practices for error handling in Workers?"
 
 ---
 
-## 4. No code was copied directly
-AI was **not** used to generate the final Worker file, Durable Object class, memory logic, or architectural design.  
-Those portions were designed, implemented, and debugged by me based on Cloudflare's APIs.
+## What AI Did NOT Do
 
-The AI assistant functioned mainly as:
+- AI did not write the final application for me
+- AI did not make architectural decisions
+- AI did not design the data flow or state management
+- AI did not debug the application end-to-end
 
-- a documentation reference tool  
-- an error-explanation helper  
-- a UI brainstorming aid  
-
-Much like using MDN, StackOverflow, or Cloudflare Docs.
-
----
-
-## 5. System prompt used inside the chatbot (production)
-This is the only *runtime* AI prompt used inside the application, sent to Workers AI:
-
-```text
-You are a friendly, helpful assistant. You can respond in English or Chinese depending on the user's input. 
-Use the conversation history as memory to provide coherent responses. Be concise and supportive.
+I used AI as a **learning tool and reference**, not as a code generator.
