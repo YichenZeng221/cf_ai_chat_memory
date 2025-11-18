@@ -5,7 +5,7 @@ compatibility_date = "2024-11-20"
 workers_dev = true
 
 [ai]
-binding = "AI"   # ⚠️ 必须有这一段，否则 AI.run 不会工作！
+binding = "AI"   
 
 [durable_objects]
 bindings = [
